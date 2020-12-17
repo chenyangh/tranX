@@ -14,12 +14,17 @@ from asdl.asdl import ASDLGrammar
 from asdl.transition_system import TransitionSystem
 from common.utils import update_args, init_arg_parser
 from components.dataset import Dataset
-from components.reranker import *
-from components.standalone_parser import StandaloneParser
+import torch
+import numpy as np
+import sys, six
+from common.registerable import Registrable
 from model import nn_utils
-from model.paraphrase import ParaphraseIdentificationModel
 from model.parser import Parser
-from model.reconstruction_model import Reconstructor
+
+# from components.reranker import *
+# from components.standalone_parser import StandaloneParser
+# from model.paraphrase import ParaphraseIdentificationModel
+# from model.reconstruction_model import Reconstructor
 from model.utils import GloveHelper
 
 assert astor.__version__ == "0.7.1"

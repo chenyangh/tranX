@@ -30,7 +30,21 @@ class Dataset(object):
 
     @staticmethod
     def from_bin_file(file_path):
-        examples = pickle.load(open(file_path, 'rb'))
+        try:
+            examples = pickle.load(open(file_path, 'rb'))
+        except Exception as e:
+            if "django" in file_path:
+                try:
+                    print("Django handlinfg")
+                    examples = pickle.load(open(file_path, 'rb'), encoding="utf-8")
+                    print("Django handling successfully")
+                except Exception as e:
+                    print("Django handling failed with 'utf-8' encoding, trying 'bytes'")
+                    examples = pickle.load(open(file_path, 'rb'), encoding="bytes")
+                    print("Django handling with 'bytes' successfully")
+            else:
+                print(e)
+                examples = pickle.load(open(file_path, 'rb'), encoding="bytes")
         return Dataset(examples)
 
     def batch_iter(self, batch_size, shuffle=False):
