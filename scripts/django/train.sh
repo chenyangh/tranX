@@ -23,7 +23,7 @@ echo "**** Writing results to logs/django/${model_name}.log ****"
 mkdir -p logs/django
 echo commit hash: `git rev-parse HEAD` > logs/django/${model_name}.log
 
-python exp.py \
+python -W ignore exp.py \
     --cuda \
     --seed ${seed} \
     --mode train \
